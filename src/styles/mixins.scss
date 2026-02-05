@@ -1,0 +1,70 @@
+@import './variables.scss';
+
+// Mixin para flex center
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Mixin para flex between
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+// Mixin para cards
+@mixin card {
+    background: $bg-card;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-sm;
+    padding: $spacing-lg;
+    transition: box-shadow $transition-base;
+
+    &:hover {
+        box-shadow: $shadow-md;
+    }
+}
+
+// Mixin para truncate text
+@mixin truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// Mixin para scrollbar personalizado
+@mixin custom-scrollbar {
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $bg-secondary;
+        border-radius: $border-radius-sm;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $border-medium;
+        border-radius: $border-radius-sm;
+
+        &:hover {
+            background: $border-dark;
+        }
+    }
+}
+
+// Mixin para status badge
+@mixin status-badge($color) {
+    display: inline-flex;
+    align-items: center;
+    padding: $spacing-xs $spacing-md;
+    border-radius: $border-radius-full;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    background-color: rgba($color, 0.1);
+    color: darken($color, 10%);
+    border: 1px solid rgba($color, 0.3);
+}

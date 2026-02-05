@@ -1,0 +1,268 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+/* 🔴 IMPORTANTE: aislar el componente */
+:host {
+    display: block;
+    width: 100%;
+    height: 100vh;
+}
+
+/* =========================
+   Contenedor principal
+========================= */
+.login-container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,
+            lighten($primary-teal, 20%) 0%,
+            $primary-teal 100%);
+    padding: $spacing-xl;
+}
+
+/* =========================
+   Card
+========================= */
+.login-card {
+    background: $bg-primary;
+    border-radius: $border-radius-xl;
+    box-shadow: $shadow-xl;
+    padding: $spacing-xl;
+    width: 100%;
+    max-width: 480px;
+    animation: fadeIn 0.3s ease-in;
+
+    @media (min-width: 768px) {
+        padding: 48px;
+    }
+}
+
+/* =========================
+   Header
+========================= */
+.login-header {
+    @include flex-between;
+    margin-bottom: $spacing-xl;
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+
+        .logo-icon {
+            font-size: 48px;
+            width: 48px;
+            height: 48px;
+            color: $primary-teal;
+        }
+
+        .logo-text {
+            h1 {
+                font-size: $font-size-3xl;
+                font-weight: $font-weight-bold;
+                color: $primary-teal;
+                line-height: 1;
+            }
+
+            p {
+                font-size: $font-size-xs;
+                color: $text-secondary;
+                letter-spacing: 1px;
+            }
+        }
+    }
+
+    .help-button {
+        color: $text-secondary;
+    }
+}
+
+/* =========================
+   Título
+========================= */
+.login-title {
+    text-align: center;
+    margin-bottom: $spacing-lg;
+
+    h2 {
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-semibold;
+        margin-bottom: $spacing-sm;
+    }
+
+    p {
+        font-size: $font-size-sm;
+        color: $text-secondary;
+    }
+}
+
+/* =========================
+   Badge
+========================= */
+.portal-badge {
+    @include flex-center;
+    gap: $spacing-sm;
+    background: linear-gradient(135deg,
+            $primary-teal-light 0%,
+            $primary-teal 100%);
+    color: $text-white;
+    padding: $spacing-md;
+    border-radius: $border-radius-md;
+    margin-bottom: $spacing-xl;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+}
+
+/* =========================
+   Formulario
+========================= */
+.login-form {
+
+    .full-width {
+        width: 100%;
+    }
+
+    /* 🔧 FIX Angular Material */
+    mat-form-field {
+        width: 100%;
+        margin-bottom: $spacing-sm;
+
+        .mat-form-field-wrapper {
+            padding-bottom: 0;
+        }
+
+        .mat-form-field-flex {
+            background-color: $bg-primary;
+            border-radius: $border-radius-md;
+            padding: 0 $spacing-sm;
+        }
+
+        .mat-form-field-infix {
+            padding: 0.75em 0;
+        }
+    }
+
+    .error-message {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        background: lighten($error-red, 40%);
+        color: $error-red;
+        padding: $spacing-md;
+        border-radius: $border-radius-md;
+        margin-bottom: $spacing-md;
+        font-size: $font-size-sm;
+    }
+
+    .forgot-password-link {
+        text-align: right;
+        margin-top: $spacing-xs;
+
+        .link-button {
+            color: $primary-teal;
+            font-size: $font-size-sm;
+            cursor: pointer;
+
+            &:hover {
+                color: $primary-teal-dark;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .sign-in-button {
+        width: 100%;
+        height: 52px;
+        margin-top: $spacing-lg;
+        font-size: $font-size-base;
+        font-weight: $font-weight-semibold;
+        border-radius: $border-radius-md;
+        letter-spacing: 0.5px;
+        position: relative;
+    }
+
+    .security-info {
+        display: flex;
+        justify-content: center;
+        gap: $spacing-lg;
+        margin-top: $spacing-lg;
+        padding-top: $spacing-lg;
+        border-top: 1px solid $border-light;
+
+        .security-item {
+            @include flex-center;
+            gap: $spacing-xs;
+            font-size: $font-size-xs;
+            color: $text-secondary;
+
+            mat-icon {
+                color: $success-green;
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+/* =========================
+   Aviso integración
+========================= */
+.integration-notice {
+    display: flex;
+    gap: $spacing-md;
+    background: lighten($info-blue, 40%);
+    border: 1px solid lighten($info-blue, 30%);
+    border-radius: $border-radius-md;
+    padding: $spacing-md;
+    margin-top: $spacing-xl;
+}
+
+/* =========================
+   Footer
+========================= */
+.login-footer {
+    text-align: center;
+    margin-top: $spacing-xl;
+    padding-top: $spacing-lg;
+    border-top: 1px solid $border-light;
+
+    p {
+        font-size: $font-size-xs;
+        color: $text-secondary;
+    }
+
+    .footer-note {
+        font-weight: $font-weight-medium;
+    }
+}
+
+/* =========================
+   Animación
+========================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 576px) {
+    .login-card {
+        padding: $spacing-lg;
+    }
+
+    .security-info {
+        flex-direction: column;
+        gap: $spacing-sm;
+    }
+}

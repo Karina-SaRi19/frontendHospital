@@ -1,0 +1,120 @@
+@import './styles/variables';
+@import './styles/mixins';
+@import './styles/material-theme';
+
+/* Reset base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base global */
+html,
+body {
+    height: 100%;
+    font-family: $font-family-primary;
+    font-size: $font-size-base;
+    color: $text-primary;
+    background-color: $bg-secondary;
+}
+
+/* Scroll personalizado */
+* {
+    @include custom-scrollbar;
+}
+
+/* =========================
+   Utilidades globales
+========================= */
+.d-flex {
+    display: flex !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.justify-center {
+    justify-content: center !important;
+}
+
+.justify-between {
+    justify-content: space-between !important;
+}
+
+.align-center {
+    align-items: center !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.gap-2 {
+    gap: $spacing-md !important;
+}
+
+.mt-2 {
+    margin-top: $spacing-md !important;
+}
+
+.mb-2 {
+    margin-bottom: $spacing-md !important;
+}
+
+.p-2 {
+    padding: $spacing-md !important;
+}
+
+.font-weight-medium {
+    font-weight: $font-weight-medium !important;
+}
+
+.font-weight-semibold {
+    font-weight: $font-weight-semibold !important;
+}
+
+/* =========================
+   Cards & badges
+========================= */
+.card {
+    @include card;
+}
+
+.badge {
+    &.badge-success {
+        @include status-badge($success-green);
+    }
+
+    &.badge-warning {
+        @include status-badge($warning-orange);
+    }
+
+    &.badge-error {
+        @include status-badge($error-red);
+    }
+
+    &.badge-info {
+        @include status-badge($info-blue);
+    }
+}
+
+/* =========================
+   Angular Material ajustes
+========================= */
+.mat-card {
+    border-radius: $border-radius-lg !important;
+}
+
+.mat-snack-bar-container {
+    &.error-snackbar {
+        background-color: $error-red;
+        color: $text-white;
+    }
+
+    &.success-snackbar {
+        background-color: $success-green;
+        color: $text-white;
+    }
+}

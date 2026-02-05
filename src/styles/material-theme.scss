@@ -1,0 +1,44 @@
+@use '@angular/material' as mat;
+@import './variables.scss';
+
+@include mat.core();
+
+// Paleta personalizada
+$h-plus-primary: (
+    50: #e8f4f4,
+    100: #c5e4e4,
+    200: #9fd2d2,
+    300: #78c0c0,
+    400: #5bb2b2,
+    500: $primary-teal,
+    600: #378d8d,
+    700: #2f7a7a,
+    800: $primary-teal-dark,
+    900: #1d5252,
+    A100: #c5e4e4,
+    A200: #9fd2d2,
+    A400: $primary-teal,
+    A700: $primary-teal-dark,
+    contrast: (50: #000000,
+        100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #ffffff,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+        800: #ffffff,
+        900: #ffffff,
+        A100: #000000,
+        A200: #ffffff,
+        A400: #ffffff,
+        A700: #ffffff,
+    )
+);
+
+$h-plus-theme: mat.define-light-theme((color: (primary: mat.define-palette($h-plus-primary),
+                accent: mat.define-palette(mat.$grey-palette),
+                warn: mat.define-palette(mat.$red-palette),
+            )));
+
+@include mat.all-component-themes($h-plus-theme);

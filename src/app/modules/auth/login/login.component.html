@@ -1,0 +1,115 @@
+<div class="login-container">
+    <div class="login-card">
+
+        <!-- Header -->
+        <div class="login-header">
+            <div class="logo-container">
+                <mat-icon class="logo-icon">local_hospital</mat-icon>
+                <div class="logo-text">
+                    <h1>H+</h1>
+                    <p>HOSPITAL MOSCATTI</p>
+                </div>
+            </div>
+
+            <button mat-icon-button class="help-button" matTooltip="Mesa de Ayuda">
+                <mat-icon>help_outline</mat-icon>
+            </button>
+        </div>
+
+        <!-- Título -->
+        <div class="login-title">
+            <h2>Acceso Seguro para Personal Médico</h2>
+            <p>Eficiencia en salud, seguridad en vida.</p>
+        </div>
+
+        <!-- Badge -->
+        <div class="portal-badge">
+            <mat-icon>verified_user</mat-icon>
+            <span>PORTAL H+ LOGIN</span>
+        </div>
+
+        <!-- Formulario -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+            <!-- Error -->
+            <div class="error-message" *ngIf="errorMessage">
+                <mat-icon>error_outline</mat-icon>
+                <span>{{ errorMessage }}</span>
+            </div>
+
+            <!-- Email -->
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email" placeholder="ej. doctor@moscatti.com"
+                    autocomplete="username" />
+                <mat-icon matPrefix>person_outline</mat-icon>
+
+                <mat-error *ngIf="email?.hasError('required')">
+                    El email es requerido
+                </mat-error>
+
+                <mat-error *ngIf="email?.hasError('email')">
+                    Ingresa un email válido
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Contraseña</mat-label>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password"
+                    autocomplete="current-password" />
+
+                <mat-icon matPrefix>lock_outline</mat-icon>
+
+                <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+                    <mat-icon>
+                        {{ hidePassword ? 'visibility_off' : 'visibility' }}
+                    </mat-icon>
+                </button>
+
+                <mat-error *ngIf="password?.hasError('required')">
+                    La contraseña es requerida
+                </mat-error>
+
+                <mat-error *ngIf="password?.hasError('minlength')">
+                    Mínimo 6 caracteres
+                </mat-error>
+
+                <div class="forgot-password-link">
+                    <a class="link-button" (click)="forgotPassword()">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+            </mat-form-field>
+
+            <!-- Botón -->
+            <button mat-raised-button color="primary" type="submit" class="sign-in-button"
+                [disabled]="loginForm.invalid || loading">
+                <mat-spinner *ngIf="loading" diameter="20" class="button-spinner"></mat-spinner>
+
+                <span *ngIf="!loading">Iniciar Sesión</span>
+                <mat-icon *ngIf="!loading">arrow_forward</mat-icon>
+            </button>
+
+            <!-- Info -->
+            <div class="security-info">
+                <div class="security-item">
+                    <mat-icon>lock</mat-icon>
+                    <span>AES-256</span>
+                </div>
+                <div class="security-item">
+                    <mat-icon>verified</mat-icon>
+                    <span>v1.0.0</span>
+                </div>
+            </div>
+
+        </form>
+
+        <!-- Footer -->
+        <div class="login-footer">
+            <p>© 2024 Hospital Moscatti</p>
+            <p class="footer-note">Acceso autorizado únicamente</p>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,82 @@
+// H+ Hospital - Variables SCSS
+// Paleta de colores basada en el diseño
+
+// Colores principales
+$primary-teal: #3D9B9B;
+$primary-teal-dark: #2A7575;
+$primary-teal-light: #5DB5B5;
+
+// Colores secundarios
+$secondary-blue-grey: #5A6C7D;
+$secondary-light-grey: #F5F7FA;
+$secondary-white: #FFFFFF;
+
+// Colores de estado
+$success-green: #4CAF50;
+$warning-orange: #FFA726;
+$error-red: #EF5350;
+$info-blue: #42A5F5;
+
+// Colores de texto
+$text-primary: #2C3E50;
+$text-secondary: #5A6C7D;
+$text-disabled: #B0BEC5;
+$text-white: #FFFFFF;
+
+// Colores de fondo
+$bg-primary: #FFFFFF;
+$bg-secondary: #F5F7FA;
+$bg-card: #FFFFFF;
+$bg-overlay: rgba(0, 0, 0, 0.5);
+
+// Colores de borde
+$border-light: #E0E6ED;
+$border-medium: #CFD8DC;
+$border-dark: #90A4AE;
+
+// Sombras
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+$shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.15);
+
+// Espaciado
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 48px;
+
+// Bordes redondeados
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+$border-radius-xl: 16px;
+$border-radius-full: 9999px;
+
+// Tipografía
+$font-family-primary: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-base: 16px;
+$font-size-lg: 18px;
+$font-size-xl: 20px;
+$font-size-2xl: 24px;
+$font-size-3xl: 32px;
+
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Transiciones
+$transition-fast: 150ms ease-in-out;
+$transition-base: 250ms ease-in-out;
+$transition-slow: 350ms ease-in-out;
+
+// Sidebar
+$sidebar-width: 240px;
+$navbar-height: 64px;
