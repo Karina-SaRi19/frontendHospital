@@ -1,0 +1,188 @@
+<div class="register-container fade-in">
+  <div class="register-card">
+
+    <div class="register-title">
+      <h2>Registro de Paciente</h2>
+      <p>Completa la información paso a paso</p>
+    </div>
+
+    <mat-horizontal-stepper linear>
+
+      <!-- ========================= -->
+      <!-- DATOS PERSONALES -->
+      <!-- ========================= -->
+      <mat-step [stepControl]="datosPersonalesForm">
+        <form [formGroup]="datosPersonalesForm">
+
+          <ng-template matStepLabel>Datos personales</ng-template>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="apellido">
+          </mat-form-field>
+
+          <!-- FECHA -->
+          <div class="fecha-grid">
+
+            <mat-form-field appearance="outline">
+              <mat-label>Día</mat-label>
+              <mat-select formControlName="dia">
+                <mat-option *ngFor="let d of dias" [value]="d">{{ d }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Mes</mat-label>
+              <mat-select formControlName="mes">
+                <mat-option *ngFor="let m of meses" [value]="m.valor">
+                  {{ m.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Año</mat-label>
+              <mat-select formControlName="anio">
+                <mat-option *ngFor="let a of anios" [value]="a">{{ a }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+
+          <div class="fecha-error" *ngIf="!fechaValida() && datosPersonalesForm.valid">
+            Fecha inválida
+          </div>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Sexo</mat-label>
+            <mat-select formControlName="sexo">
+              <mat-option value="M">Masculino</mat-option>
+              <mat-option value="F">Femenino</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Tipo de sangre</mat-label>
+            <mat-select formControlName="tipoSangre">
+              <mat-option *ngFor="let tipo of tiposSangre" [value]="tipo">
+                {{ tipo }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" matStepperNext>
+            Siguiente
+          </button>
+
+        </form>
+      </mat-step>
+
+      <!-- ========================= -->
+      <!-- CONTACTO -->
+      <!-- ========================= -->
+      <mat-step [stepControl]="contactoForm">
+        <form [formGroup]="contactoForm">
+
+          <ng-template matStepLabel>Contacto</ng-template>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+          </mat-form-field>
+
+          <!-- PASSWORD -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hidePassword ? 'password':'text'" formControlName="password">
+
+            <button mat-icon-button matSuffix
+                    (click)="hidePassword=!hidePassword"
+                    type="button">
+              <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <!-- BARRA SEGURIDAD -->
+          <div class="password-bar">
+            <div class="password-strength"
+                 [style.width.%]="passwordStrength * 20"
+                 [style.background]="getColorBarra()">
+            </div>
+          </div>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Teléfono</mat-label>
+            <input matInput formControlName="telefono">
+          </mat-form-field>
+
+          <button mat-button matStepperPrevious>Regresar</button>
+          <button mat-raised-button color="primary" matStepperNext>
+            Siguiente
+          </button>
+
+        </form>
+      </mat-step>
+
+      <!-- ========================= -->
+      <!-- MEDICO -->
+      <!-- ========================= -->
+      <mat-step [stepControl]="infoMedicaForm">
+        <form [formGroup]="infoMedicaForm">
+
+          <ng-template matStepLabel>Información médica</ng-template>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Alergias</mat-label>
+            <textarea matInput formControlName="alergias"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Antecedentes</mat-label>
+            <textarea matInput formControlName="antecedentes"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Observaciones</mat-label>
+            <textarea matInput formControlName="observaciones"></textarea>
+          </mat-form-field>
+
+          <button mat-button matStepperPrevious>Regresar</button>
+
+          <button mat-raised-button color="primary"
+                  (click)="registrar()"
+                  [disabled]="loading ||
+                              !fechaValida() ||
+                              datosPersonalesForm.invalid ||
+                              contactoForm.invalid ||
+                              infoMedicaForm.invalid">
+            Registrarse
+          </button>
+
+        </form>
+      </mat-step>
+
+    </mat-horizontal-stepper>
+
+    <!-- ========================= -->
+    <!-- VOLVER AL LOGIN -->
+    <!-- ========================= -->
+    <div class="login-link">
+      <span>¿Ya tienes una cuenta?</span>
+
+      <button mat-stroked-button
+              color="primary"
+              class="login-btn"
+              (click)="irLogin()">
+
+        <mat-icon>login</mat-icon>
+        Iniciar sesión
+      </button>
+    </div>
+
+  </div>
+</div>
