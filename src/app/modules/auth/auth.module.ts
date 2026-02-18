@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+
 
 // Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,11 +14,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+
+
 
 @NgModule({
-    declarations: [
-        LoginComponent
-    ],
+declarations: [
+  LoginComponent,
+  RegisterComponent
+],
     imports: [
         CommonModule,
         ReactiveFormsModule,
@@ -28,7 +35,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatButtonModule,
         MatIconModule,
         MatProgressSpinnerModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatSelectModule,
+        MatStepperModule,
+    MatSelectModule
     ]
 })
 export class AuthModule { }

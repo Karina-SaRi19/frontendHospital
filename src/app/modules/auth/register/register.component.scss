@@ -1,0 +1,92 @@
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #26c6da, #0097a7);
+}
+
+.register-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.register-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.fecha-grid {
+  display: grid;
+  grid-template-columns: 80px 120px 100px;
+  gap: 10px;
+  align-items: center;
+}
+
+.fade-in {
+  animation: fadeIn .5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.password-bar {
+  height: 6px;
+  background: #eee;
+  border-radius: 5px;
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
+
+.password-strength {
+  height: 100%;
+  border-radius: 5px;
+  transition: .3s;
+}
+
+.fecha-error {
+  color: #e53935;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+/* LOGIN LINK BONITO */
+.login-link {
+  text-align: center;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.login-link span {
+  color: #555;
+  font-size: 14px;
+}
+
+.login-btn {
+  border-radius: 25px;
+  padding: 8px 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all .3s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
