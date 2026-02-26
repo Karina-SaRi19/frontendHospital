@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -11,13 +11,17 @@ export class RegisterComponent {
 
   datosPersonalesForm!: FormGroup;
   contactoForm!: FormGroup;
-  infoMedicaForm!: FormGroup;
 
+  registroExitoso = false;
   loading = false;
   hidePassword = true;
   passwordStrength = 0;
 
+  @ViewChild('successSound') successSound!: ElementRef<HTMLAudioElement>;
+
   dias = Array.from({ length: 31 }, (_, i) => i + 1);
+  anios = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
+  tiposSangre = ['O+','O-','A+','A-','B+','B-','AB+','AB-'];
 
   meses = [
     { valor: 1, nombre: 'Enero' },
@@ -34,10 +38,6 @@ export class RegisterComponent {
     { valor: 12, nombre: 'Diciembre' }
   ];
 
-  anios = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
-
-  tiposSangre = ['O+','O-','A+','A-','B+','B-','AB+','AB-'];
-
   constructor(private fb: FormBuilder, private router: Router) {
 
     this.datosPersonalesForm = this.fb.group({
@@ -52,21 +52,8 @@ export class RegisterComponent {
 
     this.contactoForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.#_-]).+$/)
-        ]
-      ],
-      telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]]
-    });
-
-    this.infoMedicaForm = this.fb.group({
-      alergias: ['', Validators.required],
-      antecedentes: ['', Validators.required],
-      observaciones: ['', Validators.required]
+      password: ['', Validators.required],
+      telefono: ['', Validators.required]
     });
 
     this.contactoForm.get('password')?.valueChanges.subscribe(v => {
@@ -92,50 +79,31 @@ export class RegisterComponent {
   }
 
   fechaValida(): boolean {
-    const d = this.datosPersonalesForm.value.dia;
-    const m = this.datosPersonalesForm.value.mes;
-    const a = this.datosPersonalesForm.value.anio;
-    if (!d || !m || !a) return false;
-
-    const fecha = new Date(a, m - 1, d);
-    return fecha.getFullYear() === a &&
-           fecha.getMonth() === m - 1 &&
-           fecha.getDate() === d;
+    const { dia, mes, anio } = this.datosPersonalesForm.value;
+    if (!dia || !mes || !anio) return false;
+    const fecha = new Date(anio, mes - 1, dia);
+    return fecha.getFullYear() === anio &&
+           fecha.getMonth() === mes - 1 &&
+           fecha.getDate() === dia;
   }
 
   registrar() {
 
-    if (!this.fechaValida()) {
-      alert('Fecha de nacimiento inválida');
-      return;
-    }
-
-    if (
-      this.datosPersonalesForm.invalid ||
-      this.contactoForm.invalid ||
-      this.infoMedicaForm.invalid
-    ) return;
+    if (!this.fechaValida()) return;
+    if (this.datosPersonalesForm.invalid || this.contactoForm.invalid) return;
 
     this.loading = true;
 
-    const fechaNacimiento =
-      `${this.datosPersonalesForm.value.anio}-` +
-      `${String(this.datosPersonalesForm.value.mes).padStart(2,'0')}-` +
-      `${String(this.datosPersonalesForm.value.dia).padStart(2,'0')}`;
-
-    const registroCompleto = {
-      ...this.datosPersonalesForm.value,
-      ...this.contactoForm.value,
-      ...this.infoMedicaForm.value,
-      fechaNacimiento
-    };
-
-    console.log(registroCompleto);
-
     setTimeout(() => {
-      alert('Paciente registrado correctamente');
-      this.router.navigate(['/login/login']);
-    }, 1200);
+
+      this.registroExitoso = true;
+      this.successSound.nativeElement.play();
+
+      setTimeout(() => {
+        this.router.navigate(['/login/login']);
+      }, 3500);
+
+    }, 800);
   }
 
   irLogin() {
