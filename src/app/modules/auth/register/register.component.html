@@ -28,7 +28,6 @@
 
           <!-- FECHA -->
           <div class="fecha-grid">
-
             <mat-form-field appearance="outline">
               <mat-label>Día</mat-label>
               <mat-select formControlName="dia">
@@ -51,7 +50,6 @@
                 <mat-option *ngFor="let a of anios" [value]="a">{{ a }}</mat-option>
               </mat-select>
             </mat-form-field>
-
           </div>
 
           <div class="fecha-error" *ngIf="!fechaValida() && datosPersonalesForm.valid">
@@ -95,7 +93,6 @@
             <input matInput formControlName="email">
           </mat-form-field>
 
-          <!-- PASSWORD -->
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Contraseña</mat-label>
             <input matInput [type]="hidePassword ? 'password':'text'" formControlName="password">
@@ -121,45 +118,13 @@
           </mat-form-field>
 
           <button mat-button matStepperPrevious>Regresar</button>
-          <button mat-raised-button color="primary" matStepperNext>
-            Siguiente
-          </button>
-
-        </form>
-      </mat-step>
-
-      <!-- ========================= -->
-      <!-- MEDICO -->
-      <!-- ========================= -->
-      <mat-step [stepControl]="infoMedicaForm">
-        <form [formGroup]="infoMedicaForm">
-
-          <ng-template matStepLabel>Información médica</ng-template>
-
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Alergias</mat-label>
-            <textarea matInput formControlName="alergias"></textarea>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Antecedentes</mat-label>
-            <textarea matInput formControlName="antecedentes"></textarea>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Observaciones</mat-label>
-            <textarea matInput formControlName="observaciones"></textarea>
-          </mat-form-field>
-
-          <button mat-button matStepperPrevious>Regresar</button>
 
           <button mat-raised-button color="primary"
                   (click)="registrar()"
                   [disabled]="loading ||
                               !fechaValida() ||
                               datosPersonalesForm.invalid ||
-                              contactoForm.invalid ||
-                              infoMedicaForm.invalid">
+                              contactoForm.invalid">
             Registrarse
           </button>
 
@@ -168,17 +133,12 @@
 
     </mat-horizontal-stepper>
 
-    <!-- ========================= -->
-    <!-- VOLVER AL LOGIN -->
-    <!-- ========================= -->
+    <!-- LOGIN -->
     <div class="login-link">
       <span>¿Ya tienes una cuenta?</span>
-
-      <button mat-stroked-button
-              color="primary"
+      <button mat-stroked-button color="primary"
               class="login-btn"
               (click)="irLogin()">
-
         <mat-icon>login</mat-icon>
         Iniciar sesión
       </button>
@@ -186,3 +146,20 @@
 
   </div>
 </div>
+
+
+<!-- ============================= -->
+<!-- OVERLAY ÉXITO -->
+<!-- ============================= -->
+<div class="success-overlay" *ngIf="registroExitoso">
+  <div class="success-card">
+    <div class="checkmark-circle">
+      <div class="checkmark"></div>
+    </div>
+    <h2>Registro exitoso</h2>
+    <p>Paciente registrado correctamente</p>
+  </div>
+</div>
+
+<!-- SONIDO -->
+<audio #successSound src="assets/sounds/success.mp3"></audio>
