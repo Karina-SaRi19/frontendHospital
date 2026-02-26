@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './modules/auth/guards/auth.guard';
+import { CallbackComponent } from './modules/auth/login/callback.component';
+import { LoginComponent } from './modules/auth/login/login.component';
 
 const routes: Routes = [
   {
@@ -8,6 +10,8 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
+  { path: 'callback', component: CallbackComponent }, 
+  { path: 'auth/login', component: LoginComponent },
 
   {
     path: 'login',

@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { CallbackComponent } from './login/callback.component';
 
 
 // Angular Material
@@ -22,7 +23,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 @NgModule({
 declarations: [
   LoginComponent,
-  RegisterComponent
+  RegisterComponent,
+  CallbackComponent
 ],
     imports: [
         CommonModule,

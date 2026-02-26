@@ -1,81 +1,65 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
 
-    loginForm!: FormGroup;
-    hidePassword = true;
-    loading = false;
-    errorMessage = '';
-    returnUrl: string = '/dashboard';
+  loginForm!: FormGroup;
+  hidePassword = true;
+  errorMessage = '';
+  loading = false;
 
-    constructor(
-        private fb: FormBuilder,
-        private authService: AuthService,
-        private router: Router,
-        private route: ActivatedRoute
-    ) { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-    ngOnInit(): void {
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(3)]]
+    });
+  }
 
-        // Si ya está logueado → dashboard
-        if (this.authService.isAuthenticated()) {
-            this.router.navigate(['/dashboard']);
-            return;
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
+  onSubmit(): void {
+    if (this.loginForm.invalid) return;
+
+    this.loading = true;
+    this.errorMessage = '';
+
+    const credentials = {
+      correo: this.loginForm.value.email,
+      contrasena: this.loginForm.value.password
+    };
+
+    this.authService.login(credentials).subscribe({
+      next: (response) => {
+        if (response.authenticated) {
+          this.authService.redirectToAuthorize();
         }
+      },
+      error: () => {
+        this.errorMessage = 'Correo o contraseña incorrectos';
+        this.loading = false;
+      }
+    });
+  }
 
-        // Formulario
-        this.loginForm = this.fb.group({
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6)]]
-        });
-
-        // URL de retorno
-        this.returnUrl =
-            this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
-    }
-
-    // Getters usados en el HTML
-    get email() {
-        return this.loginForm.get('email');
-    }
-
-    get password() {
-        return this.loginForm.get('password');
-    }
-
-    onSubmit(): void {
-        if (this.loginForm.invalid) {
-            return;
-        }
-
-        this.loading = true;
-        this.errorMessage = '';
-
-        const { email, password } = this.loginForm.value;
-
-        // Simulación de login
-        setTimeout(() => {
-            const success = this.authService.login(email, password);
-
-            this.loading = false;
-
-            if (success) {
-                this.router.navigate([this.returnUrl]);
-            } else {
-                this.errorMessage = 'Credenciales inválidas';
-            }
-        }, 1200);
-    }
-
-    forgotPassword(): void {
-        alert('Funcionalidad de recuperación de contraseña (pendiente)');
-    }
+  forgotPassword(): void {
+    this.router.navigate(['/auth/forgot-password']);
+  }
 }
