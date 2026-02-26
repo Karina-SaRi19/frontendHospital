@@ -1,0 +1,42 @@
+<div class="offline-container">
+  <div class="offline-card">
+
+    <div class="hospital-brand">
+      <div class="brand-icon">
+        <mat-icon>add</mat-icon>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">H+</span>
+        <span class="brand-sub">HOSPITAL MOSCATTI</span>
+      </div>
+    </div>
+
+    <div class="offline-icon-wrapper">
+      <mat-icon class="offline-icon">wifi_off</mat-icon>
+    </div>
+
+    <h1 class="offline-title">Sin conexión a internet</h1>
+    <p class="offline-subtitle">
+      No se puede conectar con los servidores del hospital.<br>
+      Verifica tu conexión e intenta nuevamente.
+    </p>
+
+    <div class="offline-info">
+      <mat-icon>info_outline</mat-icon>
+      <span>Los datos en caché pueden estar disponibles en algunas secciones.</span>
+    </div>
+
+    <button
+      mat-raised-button
+      class="reconnect-btn"
+      (click)="tryReconnect()">
+      <mat-icon>refresh</mat-icon>
+      Intentar reconectar
+    </button>
+
+    <p class="offline-footer">
+      © 2024 Hospital Moscatti — Acceso autorizado únicamente
+    </p>
+
+  </div>
+</div>

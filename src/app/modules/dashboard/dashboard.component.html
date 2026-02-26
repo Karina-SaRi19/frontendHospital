@@ -1,3 +1,8 @@
+<div class="offline-banner" *ngIf="!(connectivityService.isOnline$ | async)">
+  <mat-icon>wifi_off</mat-icon>
+  <span>Sin conexión — Algunas funciones no están disponibles</span>
+</div>
+
 <div class="dashboard-container">
 
   <!-- SIDEBAR -->
