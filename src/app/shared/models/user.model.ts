@@ -1,28 +1,22 @@
 export interface User {
-    id: number;
-    username: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    role: UserRole;
-    isActive: boolean;
-    createdAt?: Date;
-    updatedAt?: Date;
-}
-
-export enum UserRole {
-    ADMIN = 'ADMIN',
-    DOCTOR = 'DOCTOR',
-    PATIENT = 'PATIENT'
+  idUsuario: number;
+  correo: string;
+  rol: 'MEDICO' | 'PACIENTE';
 }
 
 export interface LoginRequest {
-    email: string;
-    password: string;
+  correo: string;
+  contrasena: string;
 }
 
 export interface LoginResponse {
-    token: string;
-    user: User;
-    expiresIn: number;
+  authenticated: boolean;
+  username: string;
+  sessionId: string;
+}
+
+export interface ExchangeResponse {
+  rol: 'MEDICO' | 'PACIENTE';
+  idUsuario: number;
+  correo: string;
 }
